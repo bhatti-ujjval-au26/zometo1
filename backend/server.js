@@ -11,7 +11,7 @@ import userRouter from "./routers/userRouter";
 import orderRouter from "./routers/orderRouter";
 import config from "./config";
 
-mongoose.connect("mongodb+srv://ujjval:12345@cluster0.o3jqs.mongodb.net/Zometo?retryWrites=true&w=majority", {
+mongoose.connect(config.MONGODB_URL, {
   useNewUrlParser: true,
     useUnifiedTopology: true
 })
@@ -45,6 +45,6 @@ app.use((err, req, res, next) => {
   const status = err.name && err.name === "ValidationError" ? 400 : 500;
   res.status(status).send({ message: err.message });
 });
-app.listen(5000, () => {
+app.listen(config.PORT, () => {
   console.log("Server started on port 5000");
 });
